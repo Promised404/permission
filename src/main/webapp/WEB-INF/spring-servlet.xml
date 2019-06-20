@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.alibaba.com/schema/stat http://www.alibaba.com/schema/stat.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 启动包扫描功能 -->
+    <context:component-scan base-package="com.dpt.permission.controller" />
+
+    <!--<context:annotation-config />-->
+
+    <!-- 将springmvc不能处理的资源的请求交给tomcat -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 启动注解驱动的spring mvc 功能 -->
+    <mvc:annotation-driven/>
+
+    <mvc:resources mapping="/js/**" location="/js/" />
+    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/bootstrap3.3.5/**" location="/bootstrap3.3.5/" />
+    <mvc:resources mapping="/assets/**" location="/assets/"  />
+    <mvc:resources mapping="/ztree/**" location="/ztree/"  />
+
+    <mvc:interceptors>
+        <bean class="com.dpt.permission.common.HttpInterceptor"/>
+    </mvc:interceptors>
+
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />-->
+    <bean class="com.dpt.permission.common.ApplicationContextHelper" lazy-init="false" />
+
+    <bean class="com.dpt.permission.common.SpringExceptionResolver"/>
+
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
