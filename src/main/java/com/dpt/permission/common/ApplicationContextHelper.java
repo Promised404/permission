@@ -39,5 +39,6 @@ public class ApplicationContextHelper implements ApplicationContextAware {
         System.out.println("test");
         System.out.println("接着测试啊啊啊啊啊啊");
         System.out.println(22222);
+        System.out.println(3333);
     }
 }
